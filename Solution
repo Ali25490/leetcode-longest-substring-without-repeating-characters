@@ -1,4 +1,5 @@
 Python3 :
+Answer1 :
 
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
@@ -16,9 +17,33 @@ class Solution:
                         res = j - i + 1
         return res
         
+  
+Answer2 :
+
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        test = ""
+        # Result
+        max_length = 0
+        
+        # Return zero or 1 if string is empty or only 1 length
+        if len(s) == 0 or len(s) == 1:
+            return len(s)
+        
+        for c in s:
+            # If string already contains the character
+            # Then substring after repeating character
+            if c in test:
+                test = test[test.index(c)+1:]
+            test = test + c
+            if max_length < len(test):
+                max_length = len(test)
+        return max_length
+        
         
         
 Java :
+Answer1 :
 
 class Solution {
     public int lengthOfLongestSubstring(String str) {
@@ -42,5 +67,40 @@ class Solution {
 
         }
         return res;
+    }
+}
+
+
+Answer2 :
+
+class Solution {
+    public int lengthOfLongestSubstring(String str) {
+        String test = "";
+ 
+        // Result
+        int maxLength = -1;
+ 
+        // Return zero if string is empty
+        if (str.isEmpty()) {
+            return 0;
+        }
+        // Return one if string length is one
+        else if (str.length() == 1) {
+            return 1;
+        }
+        for (char c : str.toCharArray()) {
+            String current = String.valueOf(c);
+ 
+            // If string already contains the character
+            // Then substring after repeating character
+            if (test.contains(current)) {
+                test = test.substring(test.indexOf(current)
+                                      + 1);
+            }
+            test = test + String.valueOf(c);
+            maxLength = Math.max(test.length(), maxLength);
+        }
+ 
+        return maxLength;
     }
 }
